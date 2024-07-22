@@ -1,0 +1,19 @@
+<div class="final-task-container">
+    <button (click)="navigateToList()" class="home-button">Volver a la lista de Tareas</button>
+    <h2>Marcar Final de Tarea</h2>
+    <form [formGroup]="finalTaskForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="ComentarioFinalTarea">Comentario Final de la Tarea</label>
+        <input id="ComentarioFinalTarea" formControlName="ComentarioFinalTarea" type="text" />
+      </div>
+      <div>
+        <label for="EstadoTarea">Estado de la Tarea</label>
+        <select id = "EstadoTarea" formControlName = "EstadoTarea">
+            <option value="Tarea Activa">Tarea Activa</option>
+            <option value="Tarea Terminada">Tarea Terminada</option>
+        </select>
+      </div>
+      <button type="submit" [disabled]="finalTaskForm.invalid">Confirmar Final de Tarea</button>
+    </form>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>

@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TaskService } from '../task.service'; // Ajusta la ruta si es necesario
+import { TaskService } from '../task.service'; 
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-task',
+  standalone:true,
+  imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss']
 })
@@ -14,14 +17,14 @@ export class CreateTaskComponent {
   token: string = '';
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private taskService: TaskService,
     private router: Router
   ) {
-    this.token = localStorage.getItem('userToken') || ''; // Ajusta según cómo guardes el token
-    this.createTaskForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', Validators.required] // Ajusta según los campos necesarios
+    this.token = localStorage.getItem('userToken') || ''; 
+    this.createTaskForm = this.formBuilder.group({
+      tituloTarea: ['', Validators.required],
+      descripcionTarea: ['', Validators.required]
     });
   }
 
@@ -30,7 +33,7 @@ export class CreateTaskComponent {
       this.taskService.createTask(this.token, this.createTaskForm.value).subscribe(
         response => {
           if (response.success) {
-            this.router.navigate(['/task-list']); // Ajusta la ruta si es necesario
+            this.router.navigate(['/task-list']); 
           } else {
             this.errorMessage = response.mensaje;
           }
@@ -40,5 +43,9 @@ export class CreateTaskComponent {
         }
       );
     }
+  }
+
+  navigateToList(): void{
+    this.router.navigate(['/task-list']);
   }
 }

@@ -13,7 +13,7 @@ interface Task {
 })
 export class TaskService {
 
-  private apiUrl = 'https://codigo-alfa.cl/bootcamp-socius2024/Api/listTareasUsuario'; 
+  private apiUrl = 'https://codigo-alfa.cl/bootcamp-socius2024/Api/'; 
 
   constructor(private http: HttpClient) { }
 
@@ -24,16 +24,26 @@ export class TaskService {
 
     const body = { token };
 
-    return this.http.post<any>(this.apiUrl, body, { headers });
+    return this.http.post<any>(this.apiUrl+'listTareasUsuario', body, { headers });
   }
 
-  createTask(token: string, tituloTask: string, descripcionTask: string): Observable<any> {
+  createTask(token: string, task: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
 
-    const body = { token, tituloTask, descripcionTask};
+    const body = { token, TituloTarea: task.tituloTarea, DescripcionTarea: task.descripcionTarea };
 
-    return this.http.post<any>(`${this.apiUrl}createTask`, body, { headers });
+    return this.http.post<any>(`${this.apiUrl}insertarTarea`, body, { headers });
+  }
+
+  updateTaskStatus(userToken:string, taskId:string,task: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    const body = { RandomTarea: taskId, ComentarioFinal: task.ComentarioFinalTarea, EstadoTarea: task.EstadoTarea, token: userToken };
+
+    return this.http.post<any>(`${this.apiUrl}marcarTareaFinal`, body, { headers });
   }
 }

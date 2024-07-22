@@ -1,6 +1,41 @@
-<div>
-    <h1>Bienvenido este es el curriculum de, {{ username }}</h1>
-    <h2>Estudiante De Ingeniería en Informática</h2>
-    <h2>Universidad Técnica Federico Santa María</h2>
+<div class="container">
+    <button class="home-button" (click)="navigateToLogin()">Log Out</button>
+    <h1>Camilo Leal Schiappacase</h1>
+    <hr>
+    <div class="section">
+        <h2>Perfil Profesional</h2>
+        <p>Soy un Ingeniero Informático con una sólida formación académica y habilidades en diversas tecnologías de desarrollo. Actualmente, soy estudiante de Ingeniería en Informática en la Universidad Técnico Federico Santa María. Me apasiona la programación y siempre estoy buscando nuevas oportunidades para mejorar mis habilidades y adquirir nuevos conocimientos.</p>
+    </div>
+    <hr>
+    <div class="section">
+        <h2>Educación</h2>
+        <p><strong>Universidad Técnico Federico Santa María</strong></p>
+        <p>Ingeniería en Informática 2021 - 2024</p>
+    </div>
+    <hr>
+    <div class="section">
+        <h2>Habilidades</h2>
+        <div class="skills">
+            <ul>
+                <li>Python</li>
+                <li>Flutter</li>
+                <li>Angular</li>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>Django</li>
+                <li>PHP</li>
+                <li>JavaScript</li>
+                <li>Inglés Intermedio</li>
+                <li>Español Nativo</li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <div class="section contact">
+        <h2>Contacto</h2>
+        <p><strong>Teléfono:</strong> +56965470625</p>
+        <p><strong>Ubicación:</strong> Quilpué, Chile</p>
+    </div>
+    <button class = "view-tasks-button" (click)="navigateList()">Ver Tareas</button>
 </div>
-<button (click)="navigateList()">Ver Tareas</button>
+

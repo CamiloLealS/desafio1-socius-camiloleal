@@ -1,15 +1,22 @@
-<div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
-<div *ngIf="!errorMessage">
+<div class="task-list-container">
+  <button (click) ="navigateToCV()" class="home-button">Volver al CV</button>
   <h2>Lista de Tareas</h2>
-  <ul>
-    <li *ngFor="let task of tasks">
-      {{ task.TituloTarea }}
-      {{ task.DescripcionTarea }}
-      {{ task.EstadoTarea }}
-    </li>
-  </ul>
+  <button (click)="navigateToCreateTask()" class="create-task-btn">Crear Nueva Tarea</button>
+  <hr>
+  <div *ngIf="tasks && tasks.length; else noTasks">
+    <div class="task-item" *ngFor="let task of tasks">
+      <h3 class="task-title">{{ task.TituloTarea }}</h3>
+      <p class="task-description">{{ task.DescripcionTarea }}</p>
+      <p class="task-status">{{ task.EstadoTarea }}</p>
+      <ng-container *ngIf="task.EstadoTarea !== 'Tarea Terminada'">
+        <button (click)="storeTaskId(task.RandomTarea); navigateToFinalTask()" class="finalize-task-btn">
+          Marcar Final de Tarea
+        </button>
+      </ng-container>
+      <hr>
+    </div>
+  </div>
   <ng-template #noTasks>
-    <p>No se encuentran tareas aún</p>
+    <p class="no-tasks-message">No se encuentran tareas aún</p>
   </ng-template>
-  <button (click)="navigateToCreateTask()">Crear Nueva Tarea</button>
 </div>

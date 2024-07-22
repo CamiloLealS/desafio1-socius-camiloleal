@@ -14,6 +14,7 @@ export class TaskListComponent implements OnInit {
   tasks: any[] | null = [];
   errorMessage: string = '';
   token: string = ''; 
+  selectedTaskId: string = '';
 
   constructor(private taskService: TaskService, private router: Router) {}
 
@@ -38,7 +39,39 @@ export class TaskListComponent implements OnInit {
     );
   }
 
+  getTasks(): void {
+    this.taskService.getTasks(this.token).subscribe(
+      response => {
+        if (response.success) {
+          this.tasks = response.getTareas || [];
+        } else {
+          console.error(response.mensaje);
+        }
+      },
+      error => {
+        console.error('Error fetching tasks:', error);
+      }
+    );
+  }
+
+  selectTask(taskId: string): void {
+    this.selectedTaskId = taskId;
+  }
+
+  storeTaskId(taskId: string): void{
+    localStorage.setItem('taskToken', taskId);
+  }
+  
+
   navigateToCreateTask(): void {
     this.router.navigate(['/create-task']);
+  }
+
+  navigateToFinalTask(): void {
+    this.router.navigate(['/final-task']);
+  }
+
+  navigateToCV(): void {
+    this.router.navigate(['user-cv']);
   }
 }

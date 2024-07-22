@@ -1,1 +1,16 @@
-<p>create-task works!</p>
+<div class="create-task-container">
+    <button (click) ="navigateToList()" class="home-button">Volver a la lista de Tareas</button>
+    <h2>Crear Nueva Tarea</h2>
+    <form [formGroup]="createTaskForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="tituloTarea">Título de la Tarea</label>
+        <input id="tituloTarea" formControlName="tituloTarea" type="text" />
+      </div>
+      <div>
+        <label for="descripcionTarea">Descripción</label>
+        <input id="descripcionTarea" formControlName="descripcionTarea" type= "text"/>
+      </div>
+      <button type="submit" [disabled]="createTaskForm.invalid">Crear Tarea</button>
+    </form>
+    <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+  </div>

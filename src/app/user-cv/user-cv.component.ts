@@ -23,4 +23,8 @@ export class UserCvComponent implements OnInit {
   navigateList(): void{
     this.router.navigate(['/task-list']);
   }
+
+  navigateToLogin(): void{
+    this.router.navigate(['/login']);
+  }
 }
